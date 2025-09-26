@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>My College — Light</title>
+  <link rel="icon" type="image/x-icon" href="icon.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+  <script>navigator.serviceWorker.register("sw.js")</script>
+  <script defer src="app.js"></script>
+</head>
+
+<body>
+  <div class="safe-area">
+    <header class="topbar">
+      <div class="left">
+        <div class="title">📚 My College</div>
+        <div class="sub">Timetable & Notes</div>
+      </div>
+      <div class="right">
+        <div class="attendance">✅ <span id="attendedCount">0</span></div>
+        <button id="open-settings" class="icon-btn" title="Settings">⚙️</button>
+      </div>
+    </header>
+
+    <main class="app">
+      <nav class="segmented">
+        <button class="seg-btn active" data-tab="next">Next</button>
+        <button class="seg-btn" data-tab="timetable">Timetable</button>
+        <button class="seg-btn" data-tab="notes">Notes</button>
+      </nav>
+
+      <section class="card next-card" id="nextTab" data-tab="next" aria-live="polite">
+        <div class="next-label">Upcoming</div>
+        <h2 id="nextTitle">Loading…</h2>
+        <div id="nextMeta" class="meta">Please wait</div>
+        <div class="actions">
+          <button id="attendBtn" class="btn primary">Mark Attended</button>
+          <button id="snoozeBtn" class="btn ghost">Remind</button>
+        </div>
+      </section>
+
+      <section class="card table-card hidden" id="timetableTab" data-tab="timetable">
+        <div class="section-head">
+          <h3>Timetable</h3>
+        </div>
+        <div id="timetableContainer" class="table-wrap"></div>
+        <div class="attendance-bar">Attended: <span id="attendedCount2">0</span></div>
+      </section>
+
+      <section class="card notes-card hidden" id="notesTab" data-tab="notes">
+        <div class="section-head">
+          <h3>Notes</h3>
+        </div>
+        <form id="noteForm" class="note-form">
+          <input id="noteTitle" placeholder="Title" required maxlength="80" />
+          <textarea id="noteBody" placeholder="Take a note..." required></textarea>
+          <div class="note-actions">
+            <button type="submit" class="btn primary">Save Note</button>
+            <button type="button" id="clearNotes" class="btn ghost">Clear All</button>
+          </div>
+        </form>
+        <div id="notesList" class="notes-list"></div>
+      </section>
+
+      <button id="fabAdd" class="fab" title="Add note">＋</button>
+
+      <div id="installPrompt" class="install-prompt">
+        <button id="installBtn" class="btn primary">Install App</button>
+        <button id="dismissInstall" class="btn ghost">Later</button>
+      </div>
+
+    </main>
+
+    <footer class="bottombar">
+      <div> • Hackoro • </div>
+    </footer>
+  </div>
+
+  <template id="rowTmpl">
+    <div class="row">
+      <div class="cell day"></div>
+      <div class="cell slot"></div>
+      <div class="cell slot"></div>
+      <div class="cell slot"></div>
+      <div class="cell slot"></div>
+    </div>
+  </template>
+
+</body>
+
+</html>
